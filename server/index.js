@@ -1,22 +1,25 @@
 const express = require("express");
-const MongoClient = require("mongodb").MongoClient;
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const ObjectId = require("mongodb").ObjectID;
+const routers = require("./routes/api");
+const mongoose = require("mongoose");
+const Music = require("./models/scheme");
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-
 app.use(cors());
-const url = "mongodb://0.0.0.0:27017/";
+app.use("/api", routers);
 
-const mongoClient = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
+const url = "mongodb://0.0.0.0:27017/musicApp";
 
-let db;
-let music = [
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.Promise = global.Promise;
+
+let songs = [
 	{
 		name: "Coldplay",
 		style: "Rock",
@@ -33,46 +36,6 @@ let music = [
 	}
 ];
 
-mongoClient.connect((err, client) => {
-	db = client.db("musicApp");
-	db.collection("music").insertMany(music);
-	if (err) console.warn("Error", err);
-	app.listen(3000, () => {
-		console.log("Server running at http://0.0.0.0:3000/");
-	});
-});
+Music.collection.insertMany(songs);
 
-app.get("/music", (req, res) => {
-	db.collection("music").find().toArray((err, results) => {
-		for (let i = 0; i < results.length; i++) {
-			results[i].id = results[i]._id;
-			delete results[i]._id;
-		}
-		if (err) console.warn("Error", err);
-		res.send(results);
-	});
-});
-
-app.put("/music/:id", (req, res) => {
-	const idToObject = ObjectId(req.params.id);
-	req.body.composition = req.body.composition.split(",");
-	db.collection("music").findOneAndUpdate(
-		{_id: idToObject},
-		{
-			$set: {
-				name: req.body.name,
-				style: req.body.style,
-				composition: req.body.composition,
-				creationDate: req.body.creationDate,
-				country: req.body.country
-			}
-		},
-		{returnOriginal: false, upsert: true},
-		(err, data) => {
-			if (err) {
-				console.warn("Error", err);
-			}
-			res.send(data.value._id);
-		}
-	);
-});
+app.listen(3000);

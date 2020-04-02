@@ -1,8 +1,8 @@
 const dateToStr = webix.Date.dateToStr("%Y-%m-%d %H:%i");
 
 export const musicData = new webix.DataCollection({
-	url: "http://localhost:3000/music",
-	save: "rest->http://localhost:3000/music",
+	url: "http://localhost:3000/api/music",
+	save: "rest->http://localhost:3000/api/music",
 	scheme: {
 		$init: (item) => {
 			item.creationDate = webix.i18n.parseFormatDate(item.creationDate);
