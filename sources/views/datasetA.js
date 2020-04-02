@@ -107,7 +107,9 @@ export default class datasetA extends JetView {
 	}
 
 	refreshTable() {
-		this.musicTable.clearAll();
-		this.musicTable.load("http://localhost:3000/music");
+		musicData.load("http://localhost:3000/music").then(() => {
+			this.musicTable.clearAll();
+			this.musicTable.sync(musicData);
+		});
 	}
 }
