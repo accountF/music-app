@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {musicData} from "../../models/musicData";
+import {bandsData} from "../../models/bandsData";
 
 export default class formMusic extends JetView {
 	config() {
@@ -17,7 +17,7 @@ export default class formMusic extends JetView {
 				elements: [
 					{view: "text", label: "Groups name", name: "name", labelWidth: 150},
 					{view: "text", label: "Music style", name: "style", labelWidth: 150},
-					{view: "text", label: "Composition", name: "composition", labelWidth: 150},
+					{view: "text", label: "Songs", name: "songs", labelWidth: 150},
 					{view: "datepicker", label: "Group creation date", name: "creationDate", labelWidth: 150},
 					{view: "text", label: "Country of foundation", name: "country", labelWidth: 150},
 					{
@@ -37,13 +37,13 @@ export default class formMusic extends JetView {
 
 	showWindow(id) {
 		this.getRoot().show();
-		const itemForFill = musicData.getItem(id.row);
+		const itemForFill = bandsData.getItem(id.row);
 		this.formComponent.setValues(itemForFill);
 	}
 
 	updateMusic() {
 		const itemForUpdate = this.formComponent.getValues();
-		musicData.updateItem(itemForUpdate.id, itemForUpdate);
+		bandsData.updateItem(itemForUpdate.id, itemForUpdate);
 		this.closeWindow();
 	}
 

@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {musicData} from "../models/musicData";
+import {bandsData} from "../models/bandsData";
 import formMusic from "./datasetA/formMusic";
 
 export default class datasetA extends JetView {
@@ -8,7 +8,7 @@ export default class datasetA extends JetView {
 			rows: [
 				{
 					view: "datatable",
-					localId: "musicTable",
+					localId: "bandsTable",
 					select: true,
 					columns: [
 						{
@@ -24,7 +24,7 @@ export default class datasetA extends JetView {
 							sort: "string"
 						},
 						{
-							id: "composition",
+							id: "songs",
 							header: ["Compositions", {content: "textFilter"}],
 							fillspace: true,
 							sort: "string"
@@ -74,8 +74,8 @@ export default class datasetA extends JetView {
 	}
 
 	init() {
-		this.musicTable = this.$$("musicTable");
-		this.musicTable.sync(musicData);
+		this.musicTable = this.$$("bandsTable");
+		this.musicTable.sync(bandsData);
 		this.window = this.ui(formMusic);
 	}
 
@@ -107,9 +107,9 @@ export default class datasetA extends JetView {
 	}
 
 	refreshTable() {
-		musicData.load("http://localhost:3000/api/music").then(() => {
+		bandsData.load("http://localhost:3000/api/bands").then(() => {
 			this.musicTable.clearAll();
-			this.musicTable.sync(musicData);
+			this.musicTable.sync(bandsData);
 		});
 	}
 }

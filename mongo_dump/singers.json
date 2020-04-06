@@ -1,0 +1,21 @@
+{"_id":{"$oid":"5e8781ef9468e8156052c35b"},"name":"Freddie Mercury","role":"Singer","birth":"1946-09-05","country":"UK","awards":"Brit Awards, NME Awards","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e878d909c7acc05e4cf27ed"},"name":"Brian Harold May","role":"Instrumentalist","birth":"1947-07-19","country":"UK","awards":"NME Awards","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e878db49c7acc05e4cf27ee"},"name":"Roger Meddows Taylor","role":"Drummer","birth":"1949-07-26","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e878e4b9c7acc05e4cf27f2"},"name":"John Winston Ono Lennon","role":"Singer","birth":"1940-10-09","country":"UK","awards":"Grammy Award, NME Awards","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e878e4e9c7acc05e4cf27f3"},"name":"Paul McCartney","role":"Instrumentalist","birth":"1942-06-18","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e878e519c7acc05e4cf27f4"},"name":"Michael Philip «Mick» Jagger","role":"Instrumentalist","birth":"1943-08-26","country":"UK","awards":"Brit Awards, Grammy Award","bandId":{"$oid":"5e8786368c6c5015873a7439"}}
+{"_id":{"$oid":"5e89e5259c7acc05e4cf2810"},"name":"Keith Richards","role":"Instrumentalist","birth":"1943-12-18","country":"UK","awards":"Brit Awards, Grammy Award","bandId":{"$oid":"5e8786368c6c5015873a7439"}}
+{"_id":{"$oid":"5e89e5289c7acc05e4cf2811"},"name":"Ronald David «Ronnie» Wood","role":"Instrumentalist","birth":"1947-07-01","country":"UK","awards":"Brit Awards, Grammy Award","bandId":{"$oid":"5e8786368c6c5015873a7439"}}
+{"_id":{"$oid":"5e8afd0d9c7acc05e4cf2829"},"name":"Mike Grose","role":"Instrumentalist","birth":"1949-07-26","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8afd7e9c7acc05e4cf282a"},"name":"John Richard Deacon","role":"Instrumentalist","birth":"1951-08-19","country":"UK","awards":"NME Awards","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8afdce9c7acc05e4cf282b"},"name":"Ringo Starr","role":"Instrumentalist","birth":"1940-08-07","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8afe139c7acc05e4cf282c"},"name":"Randolph Peter «Pete» Best","role":"Instrumentalist","birth":"1941-11-24","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8afe399c7acc05e4cf282d"},"name":"Stuart Fergusson Victor Sutcliffe","role":"Guitarist","birth":"1940-07-23","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8afe7a9c7acc05e4cf282e"},"name":"Tommy Moore","role":"Drummer","birth":"1931-09-12","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8afeb09c7acc05e4cf282f"},"name":"Norman Chapman","role":"Drummer","birth":"1941-07-18","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8aff289c7acc05e4cf2830"},"name":"Jimmie Nicol","role":"Drummer","birth":"1939-08-03","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8aff4d9c7acc05e4cf2831"},"name":"Charles «Chas» Newby","role":"Instrumentalist","birth":"1941-06-18","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8affa99c7acc05e4cf2832"},"name":"George Harrison","role":"Singer","birth":"1943-02-25","country":"UK","awards":"Grammy Award","bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8b00329c7acc05e4cf2833"},"name":"Doug Bogie","role":"Instrumentalist","birth":"1948-08-02","country":"UK","awards":"NME Awards","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8b00569c7acc05e4cf2834"},"name":"Barry Mitchell","role":"Instrumentalist","birth":"1946-11-05","country":"UK","awards":"NME Awards","bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8b00ea9c7acc05e4cf2835"},"name":"Mick Avory","role":"Instrumentalist","birth":"1941-09-12","country":"UK","awards":"Brit Awards, Grammy Award","bandId":{"$oid":"5e8786368c6c5015873a7439"}}
