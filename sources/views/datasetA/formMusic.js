@@ -17,7 +17,7 @@ export default class formMusic extends JetView {
 				elements: [
 					{view: "text", label: "Groups name", name: "name", labelWidth: 150},
 					{view: "text", label: "Music style", name: "style", labelWidth: 150},
-					{view: "text", label: "Songs", name: "songs", labelWidth: 150},
+					{view: "text", label: "Albums", name: "albumNames", labelWidth: 150, disabled: true},
 					{view: "datepicker", label: "Group creation date", name: "creationDate", labelWidth: 150},
 					{view: "text", label: "Country of foundation", name: "country", labelWidth: 150},
 					{

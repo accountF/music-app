@@ -16,6 +16,5 @@ app.use("/api", routers);
 const url = "mongodb://0.0.0.0:27017/musicApp";
 
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-mongoose.Promise = global.Promise;
 
 app.listen(3000);

@@ -24,8 +24,8 @@ export default class datasetA extends JetView {
 							sort: "string"
 						},
 						{
-							id: "songs",
-							header: ["Compositions", {content: "textFilter"}],
+							id: "albumNames",
+							header: ["Albums", {content: "textFilter"}],
 							fillspace: true,
 							sort: "string"
 						},
@@ -89,8 +89,8 @@ export default class datasetA extends JetView {
 					header: "Music style"
 				},
 				{
-					id: "composition",
-					header: "Composition"
+					id: "albumNames",
+					header: "Albums"
 				},
 				{
 					id: "creationDate",

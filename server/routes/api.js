@@ -2,34 +2,35 @@ const express = require("express");
 const Bands = require("../models/bands");
 const Albums = require("../models/albums");
 const Singers = require("../models/singers");
-const Songs = require("../models/songs");
+
+const ObjectId = require("mongodb").ObjectID;
 
 const router = express.Router();
 
 // BANDS
 
 router.get("/bands", (req, res) => {
-	let bandsInfo = [];
-	let promises = [];
-	Bands.find({}).then((bands) => {
-		bands.map((band) => {
-			let bandInfo = {
-				id: band._id,
-				name: band.name,
-				style: band.style,
-				creationDate: band.creationDate,
-				country: band.country
-			};
-			promises.push(Songs.find({bandId: band._id}).then((songs) => {
-				let songArray = [];
-				songs.map(song => songArray.push(song.name));
-				bandInfo.songs = songArray.join(", ");
-				bandsInfo.push(bandInfo);
-			}));
-		});
-		Promise.all(promises).then(() => {
-			res.send(bandsInfo);
-		});
+	Bands.aggregate([
+		{
+			$lookup: {
+				from: "albums",
+				localField: "_id",
+				foreignField: "bandId",
+				as: "albumsInfo"
+			}
+		},
+		{
+			$project: {
+				id: "$_id",
+				name: 1,
+				style: 1,
+				creationDate: 1,
+				country: 1,
+				albumNames: "$albumsInfo.name"
+			}
+		}
+	]).then((bands) => {
+		res.send(bands);
 	});
 });
 
@@ -45,24 +46,34 @@ router.put("/bands/:id", (req, res) => {
 // ALBUMS
 
 router.get("/albums/:id", (req, res) => {
-	let results = [];
-	let promises = [];
-	Albums.find({bandId: req.params.id}).then((albums) => {
-		albums.map((album) => {
-			let result = {
-				id: album._id,
-				name: album.name,
-				releaseDate: album.releaseDate,
-				numberOfCopies: album.numberOfCopies
-			};
-			promises.push(Songs.countDocuments({albumId: album._id}, (err, count) => {
-				result.numberOfSongs = count;
-				results.push(result);
-				Promise.all(promises).then(() => {
-					res.send(results);
-				});
-			}));
+	Albums.aggregate([
+		{
+			$match: {bandId: ObjectId(req.params.id)}
+		},
+		{
+			$lookup: {
+				from: "songs",
+				localField: "_id",
+				foreignField: "albumId",
+				as: "songsInfo"
+			}
+		},
+		{
+			$project: {
+				id: "$_id",
+				name: 1,
+				releaseDate: 1,
+				creationDate: 1,
+				numberOfCopies: 1,
+				songsInfo: "$songsInfo.name"
+			}
+		}
+	]).then((albums) => {
+		let results = albums.map((album) => {
+			album.numberOfSongs = album.songsInfo.length;
+			return album;
 		});
+		res.send(results);
 	});
 });
 
@@ -81,47 +92,55 @@ router.delete("/albums/:id", (req, res) => {
 });
 
 router.get("/albumDetails/:id", (req, res) => {
-	let results = [];
-	let promises = [];
-	Albums.findOne({_id: req.params.id}).then((album) => {
-		let result = {
-			id: album._id,
-			albumName: album.name,
-			photo: album.photo
-		};
-		promises.push(Songs.find({albumId: album.id}).then((songs) => {
-			let songsArr = [];
-			songs.map((song) => {
-				songsArr.push(song.name);
-			});
-			result.songs = songsArr.toString();
-		}));
-		promises.push(Bands.find({_id: album.bandId}).then((bands) => {
-			let bandsArr = [];
-			bands.map((band) => {
-				bandsArr.push(band.name);
-				result.bandName = bandsArr.toString();
-				promises.push(Singers.find({bandId: band._id}).then((singers) => {
-
-					let singersArr = [];
-					singers.map((singer) => {
-						singersArr.push(singer.awards);
-					});
-					result.awards = singersArr.toString();
-					results.push(result);
-					Promise.all(promises).then(() => {
-						res.send(results);
-					});
-				}));
-			});
-		}));
+	Albums.aggregate([
+		{
+			$match: {_id: ObjectId(req.params.id)}
+		},
+		{
+			$lookup: {
+				from: "songs",
+				localField: "_id",
+				foreignField: "albumId",
+				as: "songsInfo"
+			}
+		},
+		{
+			$lookup: {
+				from: "bands",
+				localField: "bandId",
+				foreignField: "_id",
+				as: "bandsInfo"
+			}
+		},
+		{
+			$unwind: "$bandsInfo"
+		},
+		{
+			$lookup: {
+				from: "singers",
+				localField: "bandsInfo._id",
+				foreignField: "bandId",
+				as: "singersInfo"
+			}
+		},
+		{
+			$project: {
+				_id: 1,
+				bandName: "$bandsInfo.name",
+				albumName: "$name",
+				songs: "$songsInfo.name",
+				awards: "$singersInfo.awards",
+				photo: "$photo"
+			}
+		}
+	]).then((albums) => {
+		res.send(albums);
 	});
 });
 
 // SINGERS
 
 router.get("/singers", (req, res) => {
-	let promises = [];
 	let data;
 	let option;
 	if (req.query.sort) {
@@ -138,7 +157,7 @@ router.get("/singers", (req, res) => {
 
 	Singers.countDocuments({}, (err, count) => {
 		totalCount = count;
-		promises.push(Singers.find({})
+		Singers.find({})
 			.sort(option)
 			.skip(position)
 			.limit(limit)
@@ -161,10 +180,8 @@ router.get("/singers", (req, res) => {
 					pos: position,
 					total_count: totalCount
 				};
-			}));
-		Promise.all(promises).then(() => {
-			res.send(data);
-		});
+				res.send(data);
+			});
 	});
 });
 
