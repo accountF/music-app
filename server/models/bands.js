@@ -9,6 +9,6 @@ const BandsScheme = new Scheme({
 	country: String
 }, {versionKey: false});
 
-const Bands = mongoose.model("Bands", BandsScheme);
+const Bands = mongoose.model("bands", BandsScheme);
 
 module.exports = Bands;

@@ -8,7 +8,7 @@ export default class formMusic extends JetView {
 			localId: "windowWithForm",
 			position: "center",
 			head: {
-				template: "Edit song"
+				template: "Edit band"
 			},
 			width: 500,
 			body: {
