@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5e8781ef9468e8156052c358"},"name":"Queen","style":"Rock","creationDate":"1970-02-05 00:00","country":"UK"}
+{"_id":{"$oid":"5e8781ef9468e8156052c359"},"name":"The Beatles","style":"Rock","creationDate":"1960-03-19 00:00","country":"UK"}
+{"_id":{"$oid":"5e8786368c6c5015873a7439"},"name":"The Rolling Stones","style":"Rock","creationDate":"1962-03-19 00:00","country":"UK"}

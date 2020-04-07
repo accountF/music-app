@@ -49,6 +49,11 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "webix-jet": "^2.1.2"
+    "webix-jet": "^2.1.2",
+    "express": "latest",
+    "mongodb": "latest",
+    "cors": "latest",
+    "body-parser": "latest",
+    "mongoose": "latest"
   }
 }

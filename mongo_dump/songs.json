@@ -1,0 +1,13 @@
+{"_id":{"$oid":"5e8797846a2809170501f606"},"name":"Bohemian Rhapsody","albumId":{"$oid":"5e8781ef9468e8156052c35a"},"bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8797846a2809170501f607"},"name":"Don't Stop Me Now","albumId":{"$oid":"5e8781ef9468e8156052c35a"},"bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8797846a2809170501f608"},"name":"We Will Rock You","albumId":{"$oid":"5e8781ef9468e8156052c35a"},"bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8af6a79c7acc05e4cf281f"},"name":"Play The Game","albumId":{"$oid":"5e88771e9c7acc05e4cf280b"},"bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8af6d19c7acc05e4cf2820"},"name":"Love Of My Life","albumId":{"$oid":"5e88771e9c7acc05e4cf280b"},"bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8af6df9c7acc05e4cf2821"},"name":"Who Wants To Live Forever","albumId":{"$oid":"5e88771e9c7acc05e4cf280b"},"bandId":{"$oid":"5e8781ef9468e8156052c358"}}
+{"_id":{"$oid":"5e8af7b39c7acc05e4cf2822"},"name":"Hey Jude","albumId":{"$oid":"5e8877449c7acc05e4cf280d"},"bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8af8079c7acc05e4cf2823"},"name":"Cry Baby Cry","albumId":{"$oid":"5e8877449c7acc05e4cf280d"},"bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8af9949c7acc05e4cf2824"},"name":"Love Me Do","albumId":{"$oid":"5e8877479c7acc05e4cf280e"},"bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8af9b19c7acc05e4cf2825"},"name":"PS. I Love You","albumId":{"$oid":"5e8877479c7acc05e4cf280e"},"bandId":{"$oid":"5e8781ef9468e8156052c359"}}
+{"_id":{"$oid":"5e8afae09c7acc05e4cf2826"},"name":"Time Is On My Side","albumId":{"$oid":"5e88774a9c7acc05e4cf280f"},"bandId":{"$oid":"5e8786368c6c5015873a7439"}}
+{"_id":{"$oid":"5e8afb109c7acc05e4cf2827"},"name":"Heart Of Stone","albumId":{"$oid":"5e88774a9c7acc05e4cf280f"},"bandId":{"$oid":"5e8786368c6c5015873a7439"}}
+{"_id":{"$oid":"5e8afb1f9c7acc05e4cf2828"},"name":"Play With Fire","albumId":{"$oid":"5e88774a9c7acc05e4cf280f"},"bandId":{"$oid":"5e8786368c6c5015873a7439"}}

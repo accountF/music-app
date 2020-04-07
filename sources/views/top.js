@@ -1,50 +1,51 @@
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
 
 export default class TopView extends JetView {
 	config() {
-		let header = {
-			type: "header", template: this.app.config.name, css: "webix_header app_header"
-		};
-
-		let menu = {
-			view: "menu",
-			id: "top:menu",
-			css: "app_menu",
-			width: 180,
-			layout: "y",
-			select: true,
-			template: "<span class='webix_icon #icon#'></span> #value# ",
-			data: [
-				{value: "Dashboard", id: "start", icon: "wxi-columns"},
-				{value: "Data", id: "data", icon: "wxi-pencil"}
-			]
-		};
-
-		let ui = {
-			type: "clean",
-			paddingX: 5,
-			css: "app_layout",
-			cols: [
+		return {
+			rows: [
 				{
-					paddingX: 5,
-					paddingY: 10,
-					rows: [{css: "webix_shadow_medium", rows: [header, menu]}]
+					view: "toolbar",
+					padding: 3,
+					elements: [
+						{
+							view: "icon", icon: "mdi mdi-menu", click: () => this.toggleSidebar()
+						},
+						{view: "label", label: "Music App"}
+					]
 				},
 				{
-					type: "wide",
-					paddingY: 10,
-					paddingX: 5,
-					rows: [
+					cols: [
+						{
+							view: "sidebar",
+							localId: "menu",
+							data: [
+								{id: "datasetA", icon: "mdi mdi-table-edit", value: "Dataset A"},
+								{id: "datasetB", icon: "mdi mdi-table-edit", value: "Dataset B"},
+								{id: "list", icon: "mdi mdi-view-list", value: "List of record"},
+								{
+									id: "settings",
+									icon: "mdi mdi-settings-outline",
+									value: "Settings"
+								}
+							]
+						},
 						{$subview: true}
 					]
 				}
 			]
 		};
-
-		return ui;
 	}
 
-	init() {
-		this.use(plugins.Menu, "top:menu");
+	init(view, url) {
+		this.menuComponent = this.$$("menu");
+		this.menuComponent.select(url[1].page);
+		this.menuComponent.attachEvent("onAfterSelect", (newValue) => {
+			this.show(`./${newValue}`);
+		});
+	}
+
+	toggleSidebar() {
+		this.menuComponent.toggle();
 	}
 }
