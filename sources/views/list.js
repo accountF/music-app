@@ -1,5 +1,4 @@
 import {JetView} from "webix-jet";
-import {bandsData} from "../models/bandsData";
 import songsTable from "./list/songsTable";
 
 export default class datasetB extends JetView {
@@ -76,9 +75,8 @@ export default class datasetB extends JetView {
 		this.tableComponent = this.$$("recordTable");
 		this.templateComponent = this.$$("albumInfo");
 		this.window = this.ui(songsTable);
-		this.tableComponent.hide();
 		this.templateComponent.hide();
-		this.listComponent.sync(bandsData);
+		this.listComponent.load("http://localhost:3000/bands");
 		this.listComponent.attachEvent("onAfterSelect", (id) => {
 			this.templateComponent.hide();
 			this.tableComponent.clearAll();

@@ -1,5 +1,4 @@
 import {JetView} from "webix-jet";
-import {bandsData} from "../models/bandsData";
 import formMusic from "./datasetA/formMusic";
 
 export default class datasetA extends JetView {
@@ -76,41 +75,49 @@ export default class datasetA extends JetView {
 
 	init() {
 		this.musicTable = this.$$("bandsTable");
-		this.musicTable.sync(bandsData);
+		this.musicTable.load("http://localhost:3000/bands");
 		this.window = this.ui(formMusic);
+
+		this.on(this.app, "onBandChange", (band) => {
+			if (band) {
+				webix.ajax().get("http://localhost:3000/bands/").then((data) => {
+					this.musicTable.parse(data);
+				});
+			}
+		});
 	}
 
 	exportToExcel() {
 		webix.toExcel(this.musicTable, {
 			rawValues: true,
 			columns: [
-				{id: "name", header: _("Groups name")},
+				{id: "name", header: "Groups name"},
 				{
 					id: "style",
-					header: _("Music style")
+					header: "Music style"
 				},
 				{
 					id: "albumNames",
-					header: _("Albums")
+					header: "Albums"
 				},
 				{
 					id: "creationDate",
-					header: _("Group creation date"),
+					header: "Group creation date",
 					exportType: "date",
 					exportFormat: "d-mmm-yy"
 				},
 				{
 					id: "country",
-					header: _("Country of foundation")
+					header: "Country of foundation"
 				}
 			]
 		});
 	}
 
 	refreshTable() {
-		bandsData.load("http://localhost:3000/bands").then(() => {
+		webix.ajax().get("http://localhost:3000/bands/").then((data) => {
 			this.musicTable.clearAll();
-			this.musicTable.sync(bandsData);
+			this.musicTable.parse(data);
 		});
 	}
 }

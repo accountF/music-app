@@ -4,38 +4,62 @@ const Singers = require("../models/singers");
 const router = express.Router();
 
 router.get("/singers", (req, res) => {
-	let option;
+	let fieldForSort;
+	let optionSort;
 	if (req.query.sort) {
-		let fieldForSort = Object.keys(req.query.sort).toString();
-		let optionSort = req.query.sort[fieldForSort] === "asc" ? 1 : -1;
-		option = {fieldForSort: optionSort};
+		fieldForSort = Object.keys(req.query.sort).toString();
+		optionSort = req.query.sort[fieldForSort] === "asc" ? 1 : -1;
 	}
 	else {
-		option = {};
+		fieldForSort = "_id";
+		optionSort = 1;
 	}
 
 	let position = +req.query.start || 0;
-	let limit = +req.query.count || 15;
+	let limit = +req.query.count || 20;
 	let totalCount;
 
 	Singers.countDocuments({}, (err, count) => {
 		totalCount = count;
-		Singers.find({}).populate("bands")
-			.sort(option)
+		Singers
+			.aggregate([
+				{
+					$lookup: {
+						from: "bands",
+						localField: "bands",
+						foreignField: "_id",
+						as: "bandInfo"
+					}
+				},
+				{
+					$sort: {[fieldForSort]: optionSort}
+				},
+				{
+					$unwind: {path: "$bandInfo"}
+				},
+				{
+					$group: {
+						_id: "$bandInfo.name",
+						data: {
+							$push: {
+								id: "$_id",
+								name: "$name",
+								role: "$role",
+								birth: "$birth",
+								country: "$country",
+								awards: "$awards"
+							}
+						}
+					}
+				}
+			])
 			.skip(position)
 			.limit(limit)
 			.then((singers) => {
 				let results = singers.map((singer) => {
 					let result = {
-						bandName: singer.bands.name,
-						data: {
-							id: singer._id.toString(),
-							name: singer.name,
-							role: singer.role,
-							birth: singer.birth,
-							country: singer.country,
-							awards: singer.awards
-						}
+						bandName: singer._id,
+						data: singer.data
 					};
 					return result;
 				});
@@ -51,8 +75,8 @@ router.get("/singers", (req, res) => {
 
 router.put("/singers/:id", (req, res) => {
 	Singers.findByIdAndUpdate({_id: req.params.id}, req.body).then(() => {
-		Singers.findOne({_id: req.params.id}).then((bands) => {
-			res.send(bands);
+		Singers.findOne({_id: req.params.id}).then((singer) => {
+			res.send(singer);
 		});
 	});
 });

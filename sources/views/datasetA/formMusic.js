@@ -1,5 +1,4 @@
 import {JetView} from "webix-jet";
-import {bandsData} from "../../models/bandsData";
 
 export default class formMusic extends JetView {
 	config() {
@@ -38,13 +37,17 @@ export default class formMusic extends JetView {
 
 	showWindow(id) {
 		this.getRoot().show();
-		const itemForFill = bandsData.getItem(id.row);
-		this.formComponent.setValues(itemForFill);
+		webix.ajax().get(`http://localhost:3000/bands/${id}`).then((data) => {
+			let itemForFill = data.json()[0];
+			this.formComponent.setValues(itemForFill);
+		});
 	}
 
 	updateMusic() {
-		const itemForUpdate = this.formComponent.getValues();
-		bandsData.updateItem(itemForUpdate.id, itemForUpdate);
+		const data = this.formComponent.getValues();
+		webix.ajax().put(`http://localhost:3000/bands/${data.id}`, data).then((band) => {
+			this.app.callEvent("onBandChange", [band.json()]);
+		});
 		this.closeWindow();
 	}
 

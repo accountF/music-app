@@ -87,7 +87,6 @@ export default class Settings extends JetView {
 
 	toggleLanguage() {
 		const langs = this.app.getService("locale");
-		console.log(langs);
 		const value = this.$$("language").getValue();
 		langs.setLang(value);
 	}

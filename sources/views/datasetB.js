@@ -12,7 +12,7 @@ export default class datasetB extends JetView {
 				{
 					id: "bandName",
 					header: _("Band"),
-					width: 150,
+					width: 200,
 					template: (obj, common) => {
 						if (obj.$level === 1) return common.treetable(obj, common) + obj.bandName;
 						return "";
@@ -28,8 +28,8 @@ export default class datasetB extends JetView {
 					sort: "server",
 					format: webix.i18n.longDateFormatStr
 				},
-				{id: "country", header: _("Country"), width: 150, editor: "text", sort: "server"},
-				{id: "awards", header: _("Awards"), width: 150, editor: "text", sort: "server"}
+				{id: "country", header: _("Country"), width: 100, editor: "text", sort: "server"},
+				{id: "awards", header: _("Awards"), fillspace: true, editor: "text", sort: "server"}
 			]
 		};
 	}
@@ -42,11 +42,11 @@ export default class datasetB extends JetView {
 				return false;
 			} return true;
 		});
-		// this.treeComponent.attachEvent("onEditorChange", (id, value) => {
-		// 	let data = {
-		// 		[id.column]: value
-		// 	};
-		// 	webix.ajax().put(`http://localhost:3000/singers/${id.row}`, data);
-		// });
+		this.treeComponent.attachEvent("onEditorChange", (id, value) => {
+			let data = {
+				[id.column]: value
+			};
+			webix.ajax().put(`http://localhost:3000/singers/${id.row}`, data);
+		});
 	}
 }

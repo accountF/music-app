@@ -39,7 +39,6 @@ export default class songsTable extends JetView {
 		this.window = this.$$("windowWithTable");
 
 		this.tableComponent.attachEvent("onEditorChange", (id, value) => {
-			console.log(id);
 			let data = {
 				[id.column]: value
 			};
