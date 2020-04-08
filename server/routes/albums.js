@@ -79,7 +79,7 @@ router.get("/albumDetails/:id", (req, res) => {
 			$lookup: {
 				from: "singers",
 				localField: "bandsInfo._id",
-				foreignField: "bandId",
+				foreignField: "bands",
 				as: "singersInfo"
 			}
 		},

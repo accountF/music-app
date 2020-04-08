@@ -2,17 +2,18 @@ import {JetView} from "webix-jet";
 
 export default class songsTable extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			view: "window",
 			localId: "windowWithTable",
 			position: "center",
 			head: {
 				cols: [
-					{template: "Edit songs", type: "header", borderless: true},
+					{template: _("Edit songs"), type: "header", borderless: true},
 					{
 						view: "icon",
 						icon: "wxi-close",
-						tooltip: "Close window",
+						tooltip: _("Close window"),
 						click: () => this.closeWindow()
 					}
 				]
@@ -24,7 +25,7 @@ export default class songsTable extends JetView {
 				columns: [
 					{
 						id: "name",
-						header: "Name",
+						header: _("Name"),
 						editor: "text",
 						fillspace: true
 					}

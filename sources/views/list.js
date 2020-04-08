@@ -4,6 +4,7 @@ import songsTable from "./list/songsTable";
 
 export default class datasetB extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{
@@ -20,25 +21,25 @@ export default class datasetB extends JetView {
 					columns: [
 						{
 							id: "name",
-							header: "Album name",
+							header: _("Album name"),
 							fillspace: true,
 							editor: "text"
 						},
 						{
 							id: "releaseDate",
-							header: "Release date",
+							header: _("Release date"),
 							format: webix.i18n.longDateFormatStr,
 							width: 200,
 							editor: "text"
 						},
 						{
 							id: "numberOfSongs",
-							header: "Number of songs",
+							header: _("Number of songs"),
 							width: 150
 						},
 						{
 							id: "numberOfCopies",
-							header: "Number of issued copies",
+							header: _("Number of issued copies"),
 							width: 150,
 							editor: "text"
 						},
@@ -53,10 +54,10 @@ export default class datasetB extends JetView {
 				{
 					template: albumDetails => `<div>
 							<img class="album-photo" src=${albumDetails.photo} />
-							Band name: ${albumDetails.bandName} <br>
-							Album name: ${albumDetails.albumName} <br>
-							Songs: ${albumDetails.songs} <br>
-							Awards: ${albumDetails.awards}
+							${_("Band name")}: ${albumDetails.bandName} <br>
+							${_("Album name")}: ${albumDetails.albumName} <br>
+							${_("Songs")}: ${albumDetails.songs} <br>
+							${_("Awards")}: ${albumDetails.awards}
 					</div>`,
 					localId: "albumInfo"
 				}

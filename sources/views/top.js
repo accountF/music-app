@@ -2,6 +2,7 @@ import {JetView} from "webix-jet";
 
 export default class TopView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{
@@ -11,7 +12,7 @@ export default class TopView extends JetView {
 						{
 							view: "icon", icon: "mdi mdi-menu", click: () => this.toggleSidebar()
 						},
-						{view: "label", label: "Music App"}
+						{view: "label", label: _("Music App")}
 					]
 				},
 				{
@@ -20,13 +21,13 @@ export default class TopView extends JetView {
 							view: "sidebar",
 							localId: "menu",
 							data: [
-								{id: "datasetA", icon: "mdi mdi-table-edit", value: "Dataset A"},
-								{id: "datasetB", icon: "mdi mdi-table-edit", value: "Dataset B"},
-								{id: "list", icon: "mdi mdi-view-list", value: "List of record"},
+								{id: "datasetA", icon: "mdi mdi-table-edit", value: _("Dataset A")},
+								{id: "datasetB", icon: "mdi mdi-table-edit", value: _("Dataset B")},
+								{id: "list", icon: "mdi mdi-view-list", value: _("List of record")},
 								{
 									id: "settings",
 									icon: "mdi mdi-settings-outline",
-									value: "Settings"
+									value: _("Settings")
 								}
 							]
 						},

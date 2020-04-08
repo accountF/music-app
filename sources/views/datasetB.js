@@ -2,6 +2,7 @@ import {JetView} from "webix-jet";
 
 export default class datasetB extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			view: "treetable",
 			localId: "tree",
@@ -10,25 +11,25 @@ export default class datasetB extends JetView {
 			columns: [
 				{
 					id: "bandName",
-					header: "Band",
+					header: _("Band"),
 					width: 150,
 					template: (obj, common) => {
 						if (obj.$level === 1) return common.treetable(obj, common) + obj.bandName;
 						return "";
 					}
 				},
-				{id: "name", header: "Name", width: 150, editor: "text", sort: "server"},
-				{id: "role", header: "Role", width: 150, editor: "text", sort: "server"},
+				{id: "name", header: _("Name"), width: 150, editor: "text", sort: "server"},
+				{id: "role", header: _("Role"), width: 150, editor: "text", sort: "server"},
 				{
 					id: "birth",
-					header: "Birth",
+					header: _("Birth"),
 					width: 150,
 					editor: "text",
 					sort: "server",
 					format: webix.i18n.longDateFormatStr
 				},
-				{id: "country", header: "Country", width: 150, editor: "text", sort: "server"},
-				{id: "awards", header: "Awards", width: 150, editor: "text", sort: "server"}
+				{id: "country", header: _("Country"), width: 150, editor: "text", sort: "server"},
+				{id: "awards", header: _("Awards"), width: 150, editor: "text", sort: "server"}
 			]
 		};
 	}

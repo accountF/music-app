@@ -2,6 +2,7 @@ import {JetView} from "webix-jet";
 
 export default class Settings extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{
@@ -16,10 +17,10 @@ export default class Settings extends JetView {
 							columns: [
 								{
 									id: "name",
-									header: "Name",
+									header: _("Name"),
 									fillspace: true
 								},
-								{id: "size", header: "Size"}
+								{id: "size", header: _("Size")}
 							]
 						},
 						{
@@ -29,7 +30,7 @@ export default class Settings extends JetView {
 									view: "uploader",
 									width: 200,
 									localId: "upload",
-									value: "Upload file",
+									value: _("Upload file"),
 									name: "files",
 									autosend: true,
 									upload: "http://localhost:3000/uploader"
@@ -38,8 +39,21 @@ export default class Settings extends JetView {
 						}
 					]
 				},
-				{view: "radio", name: "gr1", label: "Language", options: ["English", "Russian"]},
-				{view: "button", label: "Change font size", click: () => this.changeFontSize()},
+				{
+					view: "radio",
+					localId: "language",
+					name: "gr1",
+					label: _("Language"),
+					value: this.app.getService("locale").getLang(),
+					options: [
+						{id: "en", value: _("English")},
+						{id: "ru", value: _("Russian")}
+					],
+					click: () => {
+						this.toggleLanguage();
+					}
+				},
+				{view: "button", label: _("Change font size"), click: () => this.changeFontSize()},
 				{}
 			]
 		};
@@ -67,6 +81,14 @@ export default class Settings extends JetView {
 			style.textContent = styleString;
 			document.head.append(style);
 		}
+
 		addStyle(".webix_dtable { font-size: 17px!important;}");
+	}
+
+	toggleLanguage() {
+		const langs = this.app.getService("locale");
+		console.log(langs);
+		const value = this.$$("language").getValue();
+		langs.setLang(value);
 	}
 }

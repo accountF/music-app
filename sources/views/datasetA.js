@@ -4,6 +4,7 @@ import formMusic from "./datasetA/formMusic";
 
 export default class datasetA extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{
@@ -13,25 +14,25 @@ export default class datasetA extends JetView {
 					columns: [
 						{
 							id: "name",
-							header: ["Groups name", {content: "textFilter"}],
+							header: [_("Groups name"), {content: "textFilter"}],
 							width: 150,
 							sort: "string"
 						},
 						{
 							id: "style",
-							header: ["Music style", {content: "textFilter"}],
+							header: [_("Music style"), {content: "textFilter"}],
 							autowidth: true,
 							sort: "string"
 						},
 						{
 							id: "albumNames",
-							header: ["Albums", {content: "textFilter"}],
+							header: [_("Albums"), {content: "textFilter"}],
 							fillspace: true,
 							sort: "string"
 						},
 						{
 							id: "creationDate",
-							header: ["Group creation date",
+							header: [_("Group creation date"),
 								{
 									content: "datepickerFilter",
 									compare(cellValue, filterValue) {
@@ -50,7 +51,7 @@ export default class datasetA extends JetView {
 						},
 						{
 							id: "country",
-							header: ["Country", {content: "textFilter"}],
+							header: [_("Country"), {content: "textFilter"}],
 							autowidth: true,
 							sort: "string"
 						}
@@ -63,10 +64,10 @@ export default class datasetA extends JetView {
 					cols: [
 						{
 							view: "button",
-							label: "Export to excel",
+							label: _("Export to excel"),
 							click: () => this.exportToExcel()
 						},
-						{view: "button", label: "Refresh", click: () => this.refreshTable()}
+						{view: "button", label: _("Refresh"), click: () => this.refreshTable()}
 					]
 				}
 			]
@@ -83,24 +84,24 @@ export default class datasetA extends JetView {
 		webix.toExcel(this.musicTable, {
 			rawValues: true,
 			columns: [
-				{id: "name", header: "Groups name"},
+				{id: "name", header: _("Groups name")},
 				{
 					id: "style",
-					header: "Music style"
+					header: _("Music style")
 				},
 				{
 					id: "albumNames",
-					header: "Albums"
+					header: _("Albums")
 				},
 				{
 					id: "creationDate",
-					header: "Group creation date",
+					header: _("Group creation date"),
 					exportType: "date",
 					exportFormat: "d-mmm-yy"
 				},
 				{
 					id: "country",
-					header: "Country of foundation"
+					header: _("Country of foundation")
 				}
 			]
 		});
