@@ -1,9 +1,9 @@
 import {JetView} from "webix-jet";
-import {bandsData} from "../models/bandsData";
 import formMusic from "./datasetA/formMusic";
 
 export default class datasetA extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{
@@ -13,25 +13,25 @@ export default class datasetA extends JetView {
 					columns: [
 						{
 							id: "name",
-							header: ["Groups name", {content: "textFilter"}],
+							header: [_("Groups name"), {content: "textFilter"}],
 							width: 150,
 							sort: "string"
 						},
 						{
 							id: "style",
-							header: ["Music style", {content: "textFilter"}],
+							header: [_("Music style"), {content: "textFilter"}],
 							autowidth: true,
 							sort: "string"
 						},
 						{
 							id: "albumNames",
-							header: ["Albums", {content: "textFilter"}],
+							header: [_("Albums"), {content: "textFilter"}],
 							fillspace: true,
 							sort: "string"
 						},
 						{
 							id: "creationDate",
-							header: ["Group creation date",
+							header: [_("Group creation date"),
 								{
 									content: "datepickerFilter",
 									compare(cellValue, filterValue) {
@@ -50,7 +50,7 @@ export default class datasetA extends JetView {
 						},
 						{
 							id: "country",
-							header: ["Country", {content: "textFilter"}],
+							header: [_("Country"), {content: "textFilter"}],
 							autowidth: true,
 							sort: "string"
 						}
@@ -63,10 +63,10 @@ export default class datasetA extends JetView {
 					cols: [
 						{
 							view: "button",
-							label: "Export to excel",
+							label: _("Export to excel"),
 							click: () => this.exportToExcel()
 						},
-						{view: "button", label: "Refresh", click: () => this.refreshTable()}
+						{view: "button", label: _("Refresh"), click: () => this.refreshTable()}
 					]
 				}
 			]
@@ -75,8 +75,16 @@ export default class datasetA extends JetView {
 
 	init() {
 		this.musicTable = this.$$("bandsTable");
-		this.musicTable.sync(bandsData);
+		this.musicTable.load("http://localhost:3000/bands");
 		this.window = this.ui(formMusic);
+
+		this.on(this.app, "onBandChange", (band) => {
+			if (band) {
+				webix.ajax().get("http://localhost:3000/bands/").then((data) => {
+					this.musicTable.parse(data);
+				});
+			}
+		});
 	}
 
 	exportToExcel() {
@@ -107,9 +115,9 @@ export default class datasetA extends JetView {
 	}
 
 	refreshTable() {
-		bandsData.load("http://localhost:3000/api/bands").then(() => {
+		webix.ajax().get("http://localhost:3000/bands/").then((data) => {
 			this.musicTable.clearAll();
-			this.musicTable.sync(bandsData);
+			this.musicTable.parse(data);
 		});
 	}
 }

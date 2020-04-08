@@ -8,9 +8,9 @@ const SingersScheme = new Scheme({
 	birth: String,
 	country: String,
 	awards: String,
-	bandId: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "Bands"
+	bands: {
+		type: Scheme.Types.ObjectId,
+		ref: "bands"
 	}
 }, {versionKey: false});
 
